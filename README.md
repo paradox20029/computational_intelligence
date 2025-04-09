@@ -1,119 +1,158 @@
 # ASSIGNMENT 1
-README for SIT_215_TASK1_4_annoted (2).ipynb
+# SIT_215_TASK1_4_annoted (2).ipynb
+
+*A Wheelchair Navigation System using A*, Dijkstra, and a Colab-based GUI*
+
+## Table of Contents
+1. [Overview](#overview)
+2. [Key Features](#key-features)
+3. [Directory Structure](#directory-structure)
+4. [Setup & Requirements](#setup--requirements)
+5. [Usage Instructions](#usage-instructions)
+   - [Running in Google Colab](#running-in-google-colab)
+   - [Running Locally](#running-locally)
+6. [Project Details](#project-details)
+   - [Search Algorithms](#search-algorithms)
+   - [Heuristic Functions](#heuristic-functions)
+   - [GUI Interaction](#gui-interaction)
+7. [Common Issues](#common-issues)
+8. [Planned Enhancements](#planned-enhancements)
+9. [License](#license)
+
+---
+
+## Overview
+
+This Jupyter Notebook, **SIT_215_TASK1_4_annoted (2).ipynb**, is part of an assignment under SIT215. It demonstrates a *wheelchair-friendly* navigation system built upon a **graph-based environment**, using search algorithms like **A\*** (with Euclidean or Accessibility heuristics) and **Dijkstra**. A **Colab**-compatible GUI via *ipywidgets* is included to let users input start/end nodes, pick algorithms, toggle event conditions, and visualize the resulting path in-line.
+
+---
+
+## Key Features
+
+- **Graph Model**:
+  - Nodes as physical locations (entrances, restrooms, lifts, etc.).
+  - Edges store distances and environmental constraints (steep slopes, closures, rough terrain).
+
+- **A\* Search**:
+  - *Euclidean Heuristic*: Straight-line distance from node to goal.
+  - *Accessibility-Adjusted Heuristic*: Adds penalty values for steep slopes, rough terrain, or event-time closures.
+
+- **Dijkstra Algorithm**:
+  - Explores nodes by ascending accumulated cost.
+  - Provides a comparison baseline without heuristic.
+
+- **Colab GUI**:
+  - Built with `ipywidgets`.
+  - Allows text input for start/end, dropdown for algorithm, checkbox for event conditions, a “Compute Path” button, and in-notebook route visualization.
+
+---
+
+## Directory Structure
 
 
-SIT_215_TASK1_4_annoted (2).ipynb
-A Wheelchair Navigation System using A, Dijkstra, and a Colab-based GUI*
+---
 
-Overview
-This Jupyter Notebook provides an annotated solution for a wheelchair navigation system, developed for the SIT215 assignment. It demonstrates:
+## Setup & Requirements
 
-A* with both Euclidean and Accessibility‐Adjusted heuristics.
+1. **Python 3.x**  
+2. **Packages**:
+   - `ipywidgets`
+   - `networkx`
+   - `matplotlib`
+   - `numpy`
+3. **(Optional) Jupyter**:
+   - If running locally, ensure ipywidgets is enabled:
+     ```
+     jupyter nbextension enable --py widgetsnbextension
+     ```
 
-Dijkstra’s algorithm as a baseline pathfinding approach.
+---
 
-A graph‐based environment, modeling physical locations (nodes) and distances/constraints (edges).
+## Usage Instructions
 
-A Colab / Jupyter user interface using ipywidgets to input start/end nodes, select algorithms, and visualize routes with Matplotlib.
+### Running in Google Colab
 
-Key Features
-Graph Model:
+1. Open [Google Colab](https://colab.research.google.com/) and **upload** `SIT_215_TASK1_4_annoted (2).ipynb`.
+2. In the first cell, install necessary libraries if needed:
+   ```python
+   !pip install ipywidgets networkx matplotlib numpy
+Run all cells up to the cell containing the GUI code (e.g., colab_gui_navigation(...)).
 
-Nodes represent locations (e.g., entrances, restrooms, lifts).
-
-Edges store travel distances and constraints (steep slopes, blocked paths, event closures).
-
-Search Algorithms:
-
-A* Search: Optionally toggles between Euclidean or Accessibility heuristics.
-
-Dijkstra's Algorithm: Demonstrates a pure cost-based approach with no heuristic.
-
-Heuristic Enhancements:
-
-Accessibility‐Adjusted: Adds penalty values for problematic areas, encouraging wheelchair-friendly routes.
-
-GUI in Colab:
-
-Provided by ipywidgets – user inputs start/end, toggles event conditions, picks an algorithm, and sees results inline.
-
-Requirements
-Python 3.x
-
-Jupyter Notebook or Google Colab
-
-Packages:
-
-
-pip install ipywidgets
-pip install networkx
-pip install matplotlib
-pip install numpy
-ipywidgets Enabled (if running locally):
-
-
-jupyter nbextension enable --py widgetsnbextension
-How to Use
-1. Google Colab
-Open Google Colab and upload the notebook SIT_215_TASK1_4_annoted (2).ipynb.
-
-In the first cell (if needed), install libraries:
-
-
-!pip install ipywidgets networkx matplotlib numpy
-Run all cells to define the graph (wheelchair_map), the problem class (WheelchairProblem), search algorithms (a_star_search, dijkstra_search), and the GUI function (colab_gui_navigation).
-
-Display GUI:
-
-
+In a new cell, call:
 colab_gui_navigation(
     wheelchair_map,
-    wheelchair_graph_data,   # for visualization
+    wheelchair_graph_data,
     WheelchairProblem,
     a_star_search,
     dijkstra_search,
-    show_path                # function to display route
+    show_path
 )
-Enter start/end nodes, select algorithm (A* or Dijkstra), toggle event conditions, then Compute Path. Path details and a Matplotlib figure will appear inline.
 
-2. Local Jupyter
-Clone or download the repo containing this notebook.
+## Running Locally
 
-Install required packages (see above).
+1. **Clone or Download** this repository.
 
-Enable ipywidgets if necessary:
+2. **Install required packages**:
+   ```bash
+   pip install ipywidgets networkx matplotlib numpy
+If using Jupyter Notebook/Lab, enable ipywidgets:
 
-
-jupyter nbextension enable --py widgetsnbextension
-Launch notebook:
-
-
-jupyter notebook
-Open SIT_215_TASK1_4_annoted (2).ipynb, run cells, and call colab_gui_navigation(...) in the final cell. The widget interface will appear in the notebook output.
-
-Project Structure
-python
+bash
 Copy
 Edit
-myproject/
-├── SIT_215_TASK1_4_annoted (2).ipynb   # Main annotated notebook
-├── README.md                           # This README
-└── other files (if any)...
-Within the notebook:
+jupyter nbextension enable --py widgetsnbextension
+Launch the notebook:
 
-Graph Setup: Defines wheelchair_map, wheelchair_graph_data.
+bash
+Copy
+Edit
+jupyter notebook
+Open SIT_215_TASK1_4_annoted (2).ipynb, run cells in order, then call colab_gui_navigation(...) as described. The GUI will appear in the notebook output area.
 
-Search Algos: a_star_search, dijkstra_search (with updated code returning or handling Node objects).
+Project Details
+Search Algorithms
+A*
 
-Heuristic: Euclidean or Accessibility (penalties for slopes, terrain, closures).
+Euclidean Heuristic: Straight-line distance only.
 
-GUI: ipywidgets code to create text boxes, dropdown, and a button that runs the algorithm and displays results.
+Accessibility Heuristic: Extra penalties for steep slopes, rough terrain, or event closures.
 
-Visualization: show_path function draws routes via Matplotlib.
+Dijkstra
+
+Works purely by cumulative cost, no heuristic.
+
+May return a list of Node objects if unmodified, or a final Node if updated to mirror A*.
+
+Heuristic Functions
+Euclidean:
+
+plaintext
+Copy
+Edit
+distance = sqrt((x1 - x2)^2 + (y1 - y2)^2)
+Accessibility-Adjusted:
+
+plaintext
+Copy
+Edit
+distance + slope_penalty + terrain_penalty + event_penalty
+GUI Interaction
+ipywidgets text boxes for specifying start/end nodes, a dropdown for algorithm selection, and a checkbox for Event Conditions.
+
+Clicking Compute Path runs the chosen search, printing path/cost/time in the output, and calls show_path(...) to visualize the route.
 
 Common Issues
-No Path Found: Ensure the nodes you typed exist in the graph and event closures aren’t blocking all routes.
+No path found: Possibly caused by blocked edges due to event closures, or incorrect node names that don’t exist in the graph.
 
-'list' object has no attribute 'path()': Ensure your Dijkstra code is updated or the GUI handles the difference in return types.
+"list object has no attribute .path()": If your Dijkstra code returns a list of Nodes, handle it in the GUI (or update Dijkstra to return a final Node object with a .path() method).
 
-Plot Not Showing: Verify %matplotlib inline or %matplotlib notebook is set, or in Colab just run the cell.
+Plot not displayed: Make sure you’re using %matplotlib inline or %matplotlib notebook (if local) or just run the cell in Colab as normal.
+
+pgsql
+Copy
+Edit
+
+**Instructions**:
+1. Insert this text into your README under the relevant sections.
+2. Update any references (e.g., filenames, code references) to match your project’s structure.
+3. Commit/push the updated README to GitHub, and the formatting should appear neatly.
